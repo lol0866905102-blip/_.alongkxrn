@@ -1,70 +1,157 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <title>My Bio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #ea00ff, #2a5298);
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+<meta charset="UTF-8">
+<title>Korn Noname - Glow Static Edition</title>
+<style>
+body {
+  font-family: 'Comic Sans MS', cursive;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(270deg, #ff00cc, #3333ff, #00ffcc, #ffff00);
+  background-size: 800% 800%;
+  animation: bgMove 10s infinite alternate ease-in-out;
+  cursor: none;
+}
 
-        .card {
-            background: white;
-            width: 320px;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
-        }
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
 
-        img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
+.cursor {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle, rgba(255,255,255,0.9), transparent 70%);
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  filter: blur(4px);
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
 
-        h1 {
-            margin: 10px 0 5px;
-        }
+.card {
+  background: linear-gradient(45deg, #ffffffaa, #ff66ccaa);
+  border: 5px solid #000;
+  width: 350px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 0 40px 10px #ff00ff, 0 0 60px 20px #00ffff;
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease-in-out;
+}
 
-        p {
-            color: #555;
-            font-size: 14px;
-        }
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 60px 15px #ff00ff, 0 0 80px 25px #00ffff;
+}
 
-        a {
-            display: block;
-            margin-top: 10px;
-            padding: 10px;
-            text-decoration: none;
-            background: #1e3c72;
-            color: white;
-            border-radius: 8px;
-        }
+img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 20px;
+  border: 5px dashed #ff00ff;
+  box-shadow: 0 0 20px #fff, 0 0 40px #0ff;
+  animation: pulse 1.5s infinite;
+}
 
-        a:hover {
-            background: #16305a;
-        }
-    </style>
+@keyframes pulse {
+  0%, 100% { transform: scale(1); filter: hue-rotate(0deg); }
+  50% { transform: scale(1.2); filter: hue-rotate(180deg); }
+}
+
+h1 {
+  font-size: 28px;
+  color: #ff00ff;
+  text-shadow: 2px 2px 8px #00ffff;
+  animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+  from { text-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff; }
+  to { text-shadow: 0 0 30px #00ffff, 0 0 50px #ff00ff; }
+}
+
+p {
+  color: #222;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00);
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: rainbow 2s infinite linear;
+}
+
+@keyframes rainbow {
+  to { filter: hue-rotate(360deg); }
+}
+
+a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(90deg, #ff00ff, #ff6600, #ffff00, #00ff00, #00ffff, #0000ff);
+  background-size: 400% 400%;
+  animation: colorShift 3s infinite linear;
+  box-shadow: 0 0 20px #fff;
+}
+
+@keyframes colorShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+a:hover {
+  transform: scale(1.3) rotate(5deg);
+  box-shadow: 0 0 30px #0ff, 0 0 60px #ff0;
+}
+</style>
 </head>
 <body>
 
-    <div class="card">
-        <img src="https://i.postimg.cc/zB5qhZys/IMG-20260108-104835-107.webp" alt="Profile Picture">
-        <h1>Korn Noname</h1>
-        <p>Dmมาค้าบอิอิ</p>
+<div class="cursor" id="cursor"></div>
 
-        <a href="https://www.facebook.com/alongkorn.saeaui/">Facebook</a>
-        <a href="https://instagram.com">Instagram</a>
-    </div>
+<div class="card">
+  <img src="https://i.postimg.cc/zB5qhZys/IMG-20260108-104835-107.webp" alt="Profile Picture">
+  <h1>Korn Noname</h1>
+  <p>❤️️ รักวาวาน้า ❤️️</p>
+  <a href="https://www.facebook.com/alongkorn.saeaui/">Facebook</a>
+  <a href="https://instagram.com">Instagram</a>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.pageX + 'px';
+  cursor.style.top = e.pageY + 'px';
+
+  const sparkle = document.createElement('div');
+  sparkle.style.position = 'absolute';
+  sparkle.style.left = e.pageX + 'px';
+  sparkle.style.top = e.pageY + 'px';
+  sparkle.style.width = '10px';
+  sparkle.style.height = '10px';
+  sparkle.style.borderRadius = '50%';
+  sparkle.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+  sparkle.style.pointerEvents = 'none';
+  sparkle.style.boxShadow = '0 0 20px white';
+  sparkle.style.zIndex = 999;
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 600);
+});
+</script>
 
 </body>
-
 </html>
